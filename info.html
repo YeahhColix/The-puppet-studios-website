@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Puppet Studios - Info</title>
+    <style>
+        /* CSS variables */
+        :root {
+            --purple: #370664;
+            --purpletext: #420068;
+            --lightgray: #b6b6b6;
+        }
+
+        /* Global styles */
+        body, html {
+            overflow: hidden;
+            height: 100%;
+            margin: 0;
+            background-color: black;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Info page styles */
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            max-width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--purpletext);
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-container">
+        <h1>Loading...</h1>
+    </div>
+
+    <script>
+        // Fetch and display info content
+        async function fetchInfo() {
+            try {
+                const response = await fetch('https://thepuppet57.141412.xyz/tps/websitebackend/GetText.php');
+                if (response.ok) {
+                    const text = await response.text();
+                    document.querySelector('.info-container h1').innerText = text;
+                } else {
+                    console.error('Failed to fetch text:', response.statusText);
+                    document.querySelector('.info-container p').innerText = 'Failed to load information.';
+                }
+            } catch (error) {
+                console.error('Error fetching text:', error);
+                document.querySelector('.info-container p').innerText = 'Failed to load information.';
+            }
+        }
+
+        // Load info content when the page loads
+        window.addEventListener('DOMContentLoaded', fetchInfo);
+    </script>
+</body>
+</html>
